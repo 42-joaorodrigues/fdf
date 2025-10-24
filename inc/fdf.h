@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/22 10:40:19 by joao-alm          #+#    #+#             */
+/*   Updated: 2025/10/24 14:07:11 by joao-alm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FRACTOL_H
+# define FRACTOL_H
+
+# include <stddef.h>
+
+# define WIDTH 1600
+# define HEIGHT 900
+# define STABLE_DELAY_MS 200
+
+# define ESC_KEY 65307
+
+typedef struct s_vector
+{
+	long double	x;
+	long double	y;
+}				t_vector;
+
+typedef struct s_img
+{
+	void		*ptr;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_img;
+
+typedef struct s_fractol
+{
+	void		*mlx;
+	void		*win;
+	t_img		img;
+}				t_fractol;
+
+// keyhook
+void			keyhook(t_fractol *ft);
+
+// util
+size_t			ft_time_ms(void);
+void			set_pixel(t_img *img, int x, int y, int color);
+unsigned int	get_pixel(t_img *img, int x, int y);
+
+#endif

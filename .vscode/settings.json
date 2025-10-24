@@ -1,0 +1,9 @@
+{
+	"C_Cpp.codeAnalysis.runAutomatically": true,
+	"C_Cpp.intelliSenseEngine": "disabled",
+	"C_Cpp.default.compilerPath": "/usr/bin/clang",
+	"files.associations": {
+    	"*.h": "c",
+   		"*.c": "c"
+  	},
+}

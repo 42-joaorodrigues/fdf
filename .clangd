@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - -I/home/joaopedrorodrigues/42/fdf/inc
+    - -I/home/joaopedrorodrigues/42/fdf/ccmlx
+    - -Wall
+    - -Wextra
+    - -Werror
