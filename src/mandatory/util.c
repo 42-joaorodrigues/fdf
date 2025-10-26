@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 13:46:34 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/24 14:07:06 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:26:13 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ unsigned int	get_pixel(t_img *img, int x, int y)
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
+}
+
+void	free_map(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (++i < map->height)
+		free(map->points[i]);
+	free(map->points);
 }

@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:19 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/24 14:07:11 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:26:27 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,46 @@
 
 # define ESC_KEY 65307
 
-typedef struct s_vector
-{
-	long double	x;
-	long double	y;
-}				t_vector;
-
 typedef struct s_img
 {
-	void		*ptr;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_img;
+	void			*ptr;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}					t_img;
 
-typedef struct s_fractol
+typedef struct s_point
 {
-	void		*mlx;
-	void		*win;
-	t_img		img;
-}				t_fractol;
+	int				z;
+	int				color;
+}					t_point;
+
+typedef struct s_map
+{
+	int				width;
+	int				height;
+	t_point			**points;
+}					t_map;
+
+typedef struct s_fdf
+{
+	t_map			map;
+	void			*mlx;
+	void			*win;
+	t_img			img;
+}					t_fdf;
+
+// parse
+void				parse_map(t_map *map, char *path);
 
 // keyhook
-void			keyhook(t_fractol *ft);
+void				keyhook(t_fdf *fdf);
 
 // util
-size_t			ft_time_ms(void);
-void			set_pixel(t_img *img, int x, int y, int color);
-unsigned int	get_pixel(t_img *img, int x, int y);
+size_t				ft_time_ms(void);
+void				set_pixel(t_img *img, int x, int y, int color);
+unsigned int		get_pixel(t_img *img, int x, int y);
+void				free_map(t_map *map);
 
 #endif
