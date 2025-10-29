@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 19:28:00 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/26 16:35:18 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:22:14 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static void	ft_free_split(char **split, int i)
 
 static char	**ft_fill_split(char **split, const char *s, char c)
 {
-	size_t  len;
-	int     i;
+	size_t	len;
+	int		i;
 
 	i = 0;
 	while (*s)

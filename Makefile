@@ -6,7 +6,7 @@
 #    By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/24 14:08:21 by joao-alm          #+#    #+#              #
-#    Updated: 2025/10/26 14:55:39 by joao-alm         ###   ########.fr        #
+#    Updated: 2025/10/29 14:01:05 by joao-alm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME	= fdf
 # BNAME = fractol_bonus
 FLAGS	= -Wall -Wextra -Werror -O3 -march=native -ffast-math
 
-HELPER	= atoi_base.c atoi.c free_split.c ft_split.c gnl_util.c gnl.c str_util.c
+HELPER	= atoi_base.c atoi.c free_split.c ft_split.c gnl_util.c gnl.c util.c
 HELPER	:= $(addprefix src/helper/, $(HELPER))
 
-SRC 	= fdf.c keyhook.c parser.c util.c
+SRC 	= fdf.c draw.c parser.c prep.c util.c
 SRC		:= $(addprefix src/mandatory/, $(SRC)) $(HELPER)
 OBJ		= $(SRC:%.c=obj/%.o)
 

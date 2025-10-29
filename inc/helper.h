@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 10:38:45 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/26 14:51:41 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:27:42 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ int		ft_atoi_base(const char *str, int base);
 int		ft_atoi(const char *nptr);
 
 // str_util
+void	ft_swap(int *a, int *b);
+int		ft_abs(int n);
 void	ft_putstr_fd(char *s, const int fd);
-char	*ft_strcat(char *dest, const char *src);
-char	*ft_strcpy(char *dest, const char *src);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *str, int c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t	ft_strlen(const char *s);
 
 // gnl_util
+size_t	ft_strlen(const char *s);
+void	*ft_memset(void *ptr, int c, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strjoin(char *s1, char *s2);
 

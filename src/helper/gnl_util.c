@@ -6,12 +6,24 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:17:41 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/25 16:53:43 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:25:58 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "helper.h"
 #include <stdlib.h>
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
 
 void	*ft_memset(void *ptr, int c, size_t n)
 {
