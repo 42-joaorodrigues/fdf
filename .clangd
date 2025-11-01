@@ -1,7 +1,9 @@
 CompileFlags:
   Add:
-    - -I/home/joaopedrorodrigues/42/fdf/inc
-    - -I/home/joaopedrorodrigues/42/fdf/ccmlx
-    - -Wall
-    - -Wextra
-    - -Werror
+    - "-I/home/joaopedrorodrigues/42/fdf/lib/mlx"
+    - "-I/home/joaopedrorodrigues/42/fdf/lib/libft"
+    - "-I/home/joaopedrorodrigues/42/fdf/mandatory/inc"
+    - "-I/home/joaopedrorodrigues/42/fdf/bonus/inc"
+    - "-Wall"
+    - "-Wextra"
+    - "-Werror"
