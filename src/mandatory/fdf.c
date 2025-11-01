@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:13:42 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/29 19:36:43 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:39:34 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,8 @@
 #include "mlx.h"
 #include <fcntl.h>
 #include <stdlib.h>
+#include <sys/types.h>
 #include <unistd.h>
-
-void	init_mlx(t_fdf *fdf)
-{
-	fdf->mlx = mlx_init();
-	fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "fdf");
-	fdf->img.ptr = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
-	fdf->img.addr = mlx_get_data_addr(fdf->img.ptr, &fdf->img.bits_per_pixel,
-			&fdf->img.line_length, &fdf->img.endian);
-}
 
 void	handle_args(int ac, char **av)
 {
@@ -43,14 +35,19 @@ void	handle_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_fdf	fdf;
+	void	*menu;
 
 	handle_args(ac, av);
 	parse_map(&fdf, av[1]);
 	prep_values(&fdf);
-	init_mlx(&fdf);
+	fdf.mlx = mlx_init();
+	fdf.win = mlx_new_window(fdf.mlx, WIDTH, HEIGHT, "fdf");
+	int w = WIDTH;
+	int h = HEIGHT;
+	menu = mlx_xpm_file_to_image(fdf.mlx, "fdf.xpm", &w, &h);
+	mlx_put_image_to_window(fdf.mlx, fdf.win, menu, 0, 0);
 	draw(&fdf);
-	mlx_hook(fdf.win, 17, 1L << 0, ft_exit, &fdf);
-	mlx_hook(fdf.win, 2, 1L << 0, esc_keypress, &fdf);
+	keyhook(&fdf);
 	mlx_loop(fdf.mlx);
 	ft_exit(&fdf);
 	return (0);

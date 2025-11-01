@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:47:12 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/29 19:25:52 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:51:22 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,43 @@
 #include "helper.h"
 #include "mlx.h"
 #include <math.h>
+#include <stdio.h>
 
-t_point	proj_point(t_fdf *fdf, int x, int y)
+t_point proj_point(t_fdf *fdf, int x, int y)
 {
-	t_point	p;
-
-	p = fdf->map[y][x];
-	p.x = (int)((x - y) * cos(ISO_ANGLE) * fdf->zoom + fdf->x_offset);
-	p.y = (int)(((x + y) * sin(ISO_ANGLE) - p.z * Z_SCALE) * fdf->zoom
-			+ fdf->y_offset);
-	return (p);
+    t_point p;
+    float   rotated_x, rotated_y, rotated_z;
+    float   tmp;
+    
+    p = fdf->map[y][x];
+    
+    // Start with the original coordinates
+    rotated_x = x;
+    rotated_y = y;
+    rotated_z = p.z * fdf->z_scale;
+    
+    // Apply rotations (order matters: typically Z -> Y -> X)
+    
+    // Rotate around Z axis (gamma)
+    tmp = rotated_x;
+    rotated_x = tmp * cos(fdf->gamma) - rotated_y * sin(fdf->gamma);
+    rotated_y = tmp * sin(fdf->gamma) + rotated_y * cos(fdf->gamma);
+    
+    // Rotate around Y axis (theta)
+    tmp = rotated_x;
+    rotated_x = tmp * cos(fdf->theta) + rotated_z * sin(fdf->theta);
+    rotated_z = rotated_z * cos(fdf->theta) - tmp * sin(fdf->theta);
+    
+    // Rotate around X axis (alpha)
+    tmp = rotated_y;
+    rotated_y = tmp * cos(fdf->alpha) - rotated_z * sin(fdf->alpha);
+    rotated_z = tmp * sin(fdf->alpha) + rotated_z * cos(fdf->alpha);
+    
+    // Now apply isometric projection with rotated coordinates
+    p.x = (int)((rotated_x - rotated_y) * cos(ISO_ANGLE) * fdf->zoom + fdf->x_offset);
+    p.y = (int)(((rotated_x + rotated_y) * sin(ISO_ANGLE) - rotated_z) * fdf->zoom + fdf->y_offset);
+    
+    return (p);
 }
 
 void	calculate_line_values(t_point a, t_point b, int (*d)[2], int (*step)[2])
@@ -96,6 +123,16 @@ void	new_draw_line(t_img *img, t_point a, t_point b, int i)
 	}
 }
 
+int is_line_visible(t_point a, t_point b)
+{
+    // Line is only invisible if both points are off-screen on the SAME side
+    if ((a.x < 0 && b.x < 0) || (a.x >= FDF_WIDTH && b.x >= FDF_WIDTH))
+        return (0);
+    if ((a.y < 0 && b.y < 0) || (a.y >= FDF_HEIGHT && b.y >= FDF_HEIGHT))
+        return (0);
+    return (1);
+}
+
 void	draw(t_fdf *fdf)
 {
 	int		y;
@@ -103,6 +140,8 @@ void	draw(t_fdf *fdf)
 	t_point	a;
 	t_point	b;
 
+	printf("alpha:%f tetha:%f gamma:%f\n", fdf->alpha, fdf->theta, fdf->gamma);
+	create_img(fdf);
 	y = -1;
 	while (++y < fdf->map_height)
 	{
@@ -113,14 +152,17 @@ void	draw(t_fdf *fdf)
 			if (x != fdf->map_width - 1)
 			{
 				b = proj_point(fdf, x + 1, y);
-				new_draw_line(&fdf->img, a, b, 0);
+				if (is_line_visible(a, b))
+                	new_draw_line(&fdf->img, a, b, 0);
 			}
 			if (y != fdf->map_height - 1)
 			{
 				b = proj_point(fdf, x, y + 1);
-				new_draw_line(&fdf->img, a, b, 0);
+				if (is_line_visible(a, b))
+                	new_draw_line(&fdf->img, a, b, 0);
 			}
 		}
 	}
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.ptr, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.ptr, 300, 0);
+	mlx_destroy_image(fdf->mlx, fdf->img.ptr);
 }

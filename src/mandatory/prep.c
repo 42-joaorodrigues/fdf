@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:28:15 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/29 19:39:00 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/31 13:27:21 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	prep_values(t_fdf *fdf)
 {
 	float	zoom_x;
 	float	zoom_y;
+	float	center_x;
+	float	center_y;
 
 	fdf->z_min = INT_MAX;
 	fdf->z_max = INT_MIN;
@@ -120,15 +122,19 @@ void	prep_values(t_fdf *fdf)
 	get_proj_limits(fdf);
 	fdf->xproj_span = ft_abs(fdf->xproj_max - fdf->xproj_min);
 	fdf->yproj_span = ft_abs(fdf->yproj_max - fdf->yproj_min);
-	fdf->base_color = 0xFF0000;
+	fdf->base_color = 0x306468;
 	assign_colors(fdf);
-	zoom_y = (float)HEIGHT * 0.8f / (float)fdf->yproj_span;
-	zoom_x = (float)WIDTH * 0.8f / (float)fdf->xproj_span;
+	zoom_y = (float)FDF_HEIGHT * 0.8f / (float)fdf->yproj_span;
+	zoom_x = (float)FDF_WIDTH * 0.8f / (float)fdf->xproj_span;
 	fdf->zoom = zoom_x;
 	if (zoom_y < zoom_x)
 		fdf->zoom = zoom_y;
-	fdf->x_offset = (WIDTH / 2.0f) - ((fdf->xproj_max + fdf->xproj_min) / 2.0f)
-		* fdf->zoom;
-	fdf->y_offset = (HEIGHT / 2.0f) - ((fdf->yproj_max + fdf->yproj_min) / 2.0f)
-		* fdf->zoom;
+	center_x = (fdf->xproj_max + fdf->xproj_min) / 2.0f;
+	center_y = (fdf->yproj_max + fdf->yproj_min) / 2.0f;
+	fdf->x_offset = (FDF_WIDTH / 2.0f) - (center_x * fdf->zoom);
+	fdf->y_offset = (FDF_HEIGHT / 2.0f) - (center_y * fdf->zoom);
+	fdf->z_scale = Z_SCALE;
+	fdf->alpha = 0.0f;
+    fdf->theta = 0.0f;
+    fdf->gamma = 0.0f;
 }
