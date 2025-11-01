@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types.h                                            :+:      :+:    :+:   */
+/*   types_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:22:07 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 18:24:16 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:50:52 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define DX 0
-#define DY 1
+#ifndef TYPES_BONUS_H
+# define TYPES_BONUS_H
+
+# define DX 0
+# define DY 1
 
 typedef struct s_rgb
 {
@@ -28,11 +31,11 @@ typedef struct s_limit
 
 typedef struct s_point
 {
-	int		x;
-	int		y;
-	int		z;
-	int		color;
-}			t_point;
+	int	x;
+	int	y;
+	int	z;
+	int	color;
+}		t_point;
 
 typedef struct s_bresenham
 {
@@ -42,3 +45,5 @@ typedef struct s_bresenham
 	int	step_x;
 	int	step_y;
 }		t_bresenham;
+
+#endif

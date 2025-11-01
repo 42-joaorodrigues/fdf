@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limits.c                                           :+:      :+:    :+:   */
+/*   limits_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:06:30 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 17:32:05 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:51:34 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include <limits.h>
 
 t_limit	get_z_limit(t_fdf *fdf)
 {
 	t_limit	limit_z;
-	int	x;
-	int	y;
-	int	z;
+	int		x;
+	int		y;
+	int		z;
 
 	limit_z.min = INT_MAX;
 	limit_z.max = INT_MIN;

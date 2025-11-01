@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 19:14:31 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 19:14:37 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:22:02 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	fill_map_line(t_fdf *fdf, int fd, int y)
 		if (temp)
 			fdf->map[y][x].color = ft_atoi_base(temp + 1, 16);
 		else
-			fdf->map[y][x].color = -1;
+			fdf->map[y][x].color = COLOR;
 	}
 	free_split(split);
 	return (1);

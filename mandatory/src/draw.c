@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:47:12 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 18:24:56 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:27:16 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static void	draw_horizontal(t_fdf *fdf, int x, int y, t_point a)
 	if (x != fdf->map_width - 1)
 	{
 		b = proj_point(fdf, x + 1, y);
-		if (is_line_visible(a, b))
-			line_draw(&fdf->img, a, b);
+		line_draw(&fdf->img, a, b);
 	}
 }
 
@@ -32,8 +31,7 @@ static void	draw_vertical(t_fdf *fdf, int x, int y, t_point a)
 	if (y != fdf->map_height - 1)
 	{
 		b = proj_point(fdf, x, y + 1);
-		if (is_line_visible(a, b))
-			line_draw(&fdf->img, a, b);
+		line_draw(&fdf->img, a, b);
 	}
 }
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_fdf.c                                         :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:47:12 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 18:24:56 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:34:43 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "mlx.h"
 
 static void	draw_horizontal(t_fdf *fdf, int x, int y, t_point a)

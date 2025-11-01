@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_helper.h                                       :+:      :+:    :+:   */
+/*   mlx_helper_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:21:06 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 17:21:26 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:50:49 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef MLX_HELPER_BONUS_H
+# define MLX_HELPER_BONUS_H
 
 # define ESC_KEY 65307
 # define W_KEY 119
@@ -35,3 +38,5 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 }			t_img;
+
+#endif

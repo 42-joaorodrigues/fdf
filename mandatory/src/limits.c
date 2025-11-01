@@ -5,38 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/01 17:06:30 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 17:32:05 by joao-alm         ###   ########.fr       */
+/*   Created: 2025/11/01 19:39:54 by joao-alm          #+#    #+#             */
+/*   Updated: 2025/11/01 19:50:21 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include <limits.h>
-
-t_limit	get_z_limit(t_fdf *fdf)
-{
-	t_limit	limit_z;
-	int	x;
-	int	y;
-	int	z;
-
-	limit_z.min = INT_MAX;
-	limit_z.max = INT_MIN;
-	y = -1;
-	while (++y < fdf->map_height)
-	{
-		x = -1;
-		while (++x < fdf->map_width)
-		{
-			z = fdf->map[y][x].z;
-			if (z < limit_z.min)
-				limit_z.min = z;
-			if (z > limit_z.max)
-				limit_z.max = z;
-		}
-	}
-	return (limit_z);
-}
 
 void	calc_xy_limits(t_fdf *fdf, t_limit *limit_x, t_limit *limit_y)
 {

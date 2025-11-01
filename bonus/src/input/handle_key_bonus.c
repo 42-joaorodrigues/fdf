@@ -6,11 +6,11 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:30:00 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 19:18:52 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:34:57 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 #define ROTATION_STEP 0.1
 #define Z_SCALE_STEP 0.1

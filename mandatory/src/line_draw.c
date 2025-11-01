@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 16:40:00 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 18:56:26 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:42:37 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ static void	draw_low_slope(t_img *img, t_point start, t_point end,
 		t_bresenham *bres)
 {
 	int	i;
-	int	color;
 
+	(void)end;
 	i = 0;
-	color = get_color_gradient(start, end, i, bres->dx);
-	set_pixel(img, start.x, start.y, color);
+	set_pixel(img, start.x, start.y, start.color);
 	while (i < bres->dx)
 	{
 		start.x += bres->step_x;
@@ -33,8 +32,7 @@ static void	draw_low_slope(t_img *img, t_point start, t_point end,
 			bres->p = bres->p + 2 * bres->dy - 2 * bres->dx;
 		}
 		i++;
-		color = get_color_gradient(start, end, i, bres->dx);
-		set_pixel(img, start.x, start.y, color);
+		set_pixel(img, start.x, start.y, start.color);
 	}
 }
 
@@ -42,11 +40,10 @@ static void	draw_high_slope(t_img *img, t_point start, t_point end,
 		t_bresenham *bres)
 {
 	int	i;
-	int	color;
 
+	(void)end;
 	i = 0;
-	color = get_color_gradient(start, end, i, bres->dy);
-	set_pixel(img, start.x, start.y, color);
+	set_pixel(img, start.x, start.y, start.color);
 	while (i < bres->dy)
 	{
 		start.y += bres->step_y;
@@ -58,8 +55,7 @@ static void	draw_high_slope(t_img *img, t_point start, t_point end,
 			bres->p = bres->p + 2 * bres->dx - 2 * bres->dy;
 		}
 		i++;
-		color = get_color_gradient(start, end, i, bres->dy);
-		set_pixel(img, start.x, start.y, color);
+		set_pixel(img, start.x, start.y, start.color);
 	}
 }
 

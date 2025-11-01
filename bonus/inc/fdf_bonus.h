@@ -6,16 +6,16 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:19 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 19:18:21 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:44:17 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include <stddef.h>
-# include "mlx_helper.h"
-# include "types.h"
+# include "mlx_helper_bonus.h"
+# include "types_bonus.h"
 
 # define WIDTH 1600
 # define HEIGHT 900

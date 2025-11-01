@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   views.c                                            :+:      :+:    :+:   */
+/*   view.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 16:30:00 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 17:46:41 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:50:14 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,4 @@ void	calculate_view(t_fdf *fdf)
 		* fdf->zoom;
 	fdf->y_offset = (HEIGHT / 2.0f) - ((limit_y.max + limit_y.min) / 2.0f)
 		* fdf->zoom;
-}
-
-void	set_isometric_view(t_fdf *fdf)
-{
-	fdf->alpha = 0.0f;
-	fdf->theta = 0.0f;
-	fdf->gamma = 0.0f;
-	fdf->projection_mode = PROJ_ISOMETRIC;
-	calculate_view(fdf);
-}
-
-void	set_frontal_view(t_fdf *fdf)
-{
-	fdf->alpha = 0.0f;
-	fdf->theta = 0.0f;
-	fdf->gamma = 0.0f;
-	fdf->projection_mode = PROJ_ORTHOGRAPHIC;
-	calculate_view(fdf);
-}
-
-void	set_top_view(t_fdf *fdf)
-{
-	fdf->alpha = 1.5708f;
-	fdf->theta = 3.14159f;
-	fdf->gamma = 3.14159f;
-	fdf->projection_mode = PROJ_ORTHOGRAPHIC;
-	calculate_view(fdf);
 }

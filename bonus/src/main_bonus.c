@@ -6,11 +6,11 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:13:42 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 19:16:27 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:34:28 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "libft.h"
 #include "mlx.h"
 #include <fcntl.h>

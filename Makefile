@@ -6,7 +6,7 @@
 #    By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/24 14:08:21 by joao-alm          #+#    #+#              #
-#    Updated: 2025/11/01 19:16:19 by joao-alm         ###   ########.fr        #
+#    Updated: 2025/11/01 19:43:28 by joao-alm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,24 +30,13 @@ LIBFTL	= -Llib/libft -lft
 # mandatory files
 INC		= -I mandatory/inc $(MLXINC) $(LIBFTIN)
 SRC		= main.c \
-		  \
+		  draw.c \
+		  limits.c \
+		  line_draw.c \
 		  parser.c \
-		  \
-		  input/handle_key.c \
-		  input/keyhook.c \
-		  \
-		  projection/projection.c \
-		  projection/rotation.c \
-		  projection/views.c \
-		  \
-		  render/color_gradient.c \
-		  render/draw_fdf.c \
-		  render/draw_util.c \
-		  render/line_draw.c \
-		  \
-		  util/color.c \
-		  util/exit.c \
-		  util/limits.c
+		  projection.c \
+		  util.c \
+		  view.c
 SRC		:= $(addprefix mandatory/src/, $(SRC))
 OBJ		= $(SRC:%.c=obj/%.o)
 
@@ -65,7 +54,7 @@ BSRC	= main_bonus.c \
 		  projection/views_bonus.c \
 		  \
 		  render/color_gradient_bonus.c \
-		  render/draw_fdf_bonus.c \
+		  render/draw_bonus.c \
 		  render/draw_util_bonus.c \
 		  render/line_draw_bonus.c \
 		  \

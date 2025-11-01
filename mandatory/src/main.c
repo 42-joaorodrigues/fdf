@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:13:42 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 19:14:34 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:46:31 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	main(int ac, char **av)
 
 	handle_args(ac, av);
 	parse_map(&fdf, av[1]);
-	assign_colors(&fdf);
-	fdf.z_scale = 1;
-	set_isometric_view(&fdf);
+	fdf.z_scale = 1.0f;
+	calculate_view(&fdf);
 	fdf.mlx = mlx_init();
 	fdf.win = mlx_new_window(fdf.mlx, WIDTH, HEIGHT, "fdf");
 	draw_fdf(&fdf);
-	keyhook(&fdf);
+	mlx_hook(fdf.win, 2, 1L << 0, handle_keypress, &fdf);
+	mlx_hook(fdf.win, 17, 1L << 0, ft_exit, &fdf);
 	mlx_loop(fdf.mlx);
 	ft_exit(&fdf);
 	return (0);

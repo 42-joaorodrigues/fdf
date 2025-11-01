@@ -6,11 +6,11 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 16:40:00 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 19:16:46 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 19:34:39 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "libft.h"
 
 static void	draw_low_slope(t_img *img, t_point start, t_point end,
