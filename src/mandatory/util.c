@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 13:46:34 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/30 15:38:53 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:29:21 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	set_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= FDF_WIDTH || y < 0 || y >= FDF_HEIGHT)
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -27,7 +27,7 @@ void	set_pixel(t_img *img, int x, int y, int color)
 
 void	create_img(t_fdf *fdf)
 {
-	fdf->img.ptr = mlx_new_image(fdf->mlx, FDF_WIDTH, FDF_HEIGHT);
+	fdf->img.ptr = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
 	fdf->img.addr = mlx_get_data_addr(fdf->img.ptr, &fdf->img.bits_per_pixel,
 			&fdf->img.line_length, &fdf->img.endian);
 }
@@ -42,8 +42,11 @@ void	free_map(t_fdf *fdf)
 	free(fdf->map);
 }
 
-int	ft_exit(t_fdf *fdf)
+int	ft_exit(void *param)
 {
+	t_fdf	*fdf;
+
+	fdf = (t_fdf *)param;
 	mlx_destroy_window(fdf->mlx, fdf->win);
 	mlx_destroy_display(fdf->mlx);
 	free(fdf->mlx);

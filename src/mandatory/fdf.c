@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 21:13:42 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/30 15:39:34 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:30:46 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,12 @@ void	handle_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_fdf	fdf;
-	void	*menu;
 
 	handle_args(ac, av);
 	parse_map(&fdf, av[1]);
 	prep_values(&fdf);
 	fdf.mlx = mlx_init();
 	fdf.win = mlx_new_window(fdf.mlx, WIDTH, HEIGHT, "fdf");
-	int w = WIDTH;
-	int h = HEIGHT;
-	menu = mlx_xpm_file_to_image(fdf.mlx, "fdf.xpm", &w, &h);
-	mlx_put_image_to_window(fdf.mlx, fdf.win, menu, 0, 0);
 	draw(&fdf);
 	keyhook(&fdf);
 	mlx_loop(fdf.mlx);

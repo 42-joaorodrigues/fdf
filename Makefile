@@ -6,13 +6,14 @@
 #    By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/24 14:08:21 by joao-alm          #+#    #+#              #
-#    Updated: 2025/11/01 14:10:26 by joao-alm         ###   ########.fr        #
+#    Updated: 2025/11/01 14:30:05 by joao-alm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fdf
 # BNAME = fractol_bonus
-FLAGS	= -Wall -Wextra -Werror -O3 -march=native -ffast-math
+# -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror -Wno-incompatible-pointer-types -O3 -march=native -ffast-math
 
 HELPER	= atoi_base.c atoi.c free_split.c ft_split.c gnl_util.c gnl.c util.c
 HELPER	:= $(addprefix src/helper/, $(HELPER))

@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:19 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/11/01 14:03:33 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:01:52 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 # define WIDTH 1600
 # define HEIGHT 900
-# define FDF_WIDTH 1300
-# define FDF_HEIGHT 900
 # define TRANSLATION_FACTOR 100
 # define ZOOM_FACTOR 1.5
-# define STABLE_DELAY_MS 200
 
 # define ISO_ANGLE 0.523599
 # define Z_SCALE 1
+
+# define PROJ_ISOMETRIC 0
+# define PROJ_ORTHOGRAPHIC 1
 
 # define ESC_KEY 65307
 # define W_KEY 119
@@ -41,10 +41,7 @@
 # define RIGHT_ARROW_KEY 65363
 # define I_KEY 105
 # define T_KEY 116
-# define C_KEY 99
 # define F_KEY 102
-# define SHIFT_KEY 65505
-# define CTRL_KEY 65507
 
 typedef struct s_rgb
 {
@@ -95,6 +92,7 @@ typedef struct s_fdf
 	float		alpha;
 	float		theta;
 	float		gamma;
+	int			projection_mode;
 }				t_fdf;
 
 // parse
@@ -102,19 +100,19 @@ void			parse_map(t_fdf *fdf, char *path);
 
 // prep
 void			prep_values(t_fdf *fdf);
+void			recalculate_view(t_fdf *fdf);
 
 // draw
 void			draw(t_fdf *fdf);
+t_point			proj_point(t_fdf *fdf, int x, int y);
 
 // keyhook
 void			keyhook(t_fdf *fdf);
-int				handle_keypress(int key, t_fdf *fdf);
-int				handle_mouse(int button, int x, int y, t_fdf *fdf);
 
 // util
 void			set_pixel(t_img *img, int x, int y, int color);
 void			create_img(t_fdf *fdf);
 void			free_map(t_fdf *fdf);
-int				ft_exit(t_fdf *fdf);
+int				ft_exit(void *param);
 
 #endif

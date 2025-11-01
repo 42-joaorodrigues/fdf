@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:47:12 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/30 17:51:22 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:02:53 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,19 @@ t_point proj_point(t_fdf *fdf, int x, int y)
     rotated_y = tmp * cos(fdf->alpha) - rotated_z * sin(fdf->alpha);
     rotated_z = tmp * sin(fdf->alpha) + rotated_z * cos(fdf->alpha);
     
-    // Now apply isometric projection with rotated coordinates
-    p.x = (int)((rotated_x - rotated_y) * cos(ISO_ANGLE) * fdf->zoom + fdf->x_offset);
-    p.y = (int)(((rotated_x + rotated_y) * sin(ISO_ANGLE) - rotated_z) * fdf->zoom + fdf->y_offset);
+    // Apply projection
+    if (fdf->projection_mode == PROJ_ISOMETRIC)
+    {
+        // Isometric projection
+        p.x = (int)((rotated_x - rotated_y) * cos(ISO_ANGLE) * fdf->zoom + fdf->x_offset);
+        p.y = (int)(((rotated_x + rotated_y) * sin(ISO_ANGLE) - rotated_z) * fdf->zoom + fdf->y_offset);
+    }
+    else
+    {
+        // Orthographic projection (simple 2D projection after rotation)
+        p.x = (int)(rotated_x * fdf->zoom + fdf->x_offset);
+        p.y = (int)(-rotated_z * fdf->zoom + fdf->y_offset);
+    }
     
     return (p);
 }
@@ -126,9 +136,9 @@ void	new_draw_line(t_img *img, t_point a, t_point b, int i)
 int is_line_visible(t_point a, t_point b)
 {
     // Line is only invisible if both points are off-screen on the SAME side
-    if ((a.x < 0 && b.x < 0) || (a.x >= FDF_WIDTH && b.x >= FDF_WIDTH))
+    if ((a.x < 0 && b.x < 0) || (a.x >= WIDTH && b.x >= WIDTH))
         return (0);
-    if ((a.y < 0 && b.y < 0) || (a.y >= FDF_HEIGHT && b.y >= FDF_HEIGHT))
+    if ((a.y < 0 && b.y < 0) || (a.y >= HEIGHT && b.y >= HEIGHT))
         return (0);
     return (1);
 }
@@ -140,7 +150,6 @@ void	draw(t_fdf *fdf)
 	t_point	a;
 	t_point	b;
 
-	printf("alpha:%f tetha:%f gamma:%f\n", fdf->alpha, fdf->theta, fdf->gamma);
 	create_img(fdf);
 	y = -1;
 	while (++y < fdf->map_height)
@@ -163,6 +172,6 @@ void	draw(t_fdf *fdf)
 			}
 		}
 	}
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.ptr, 300, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.ptr, 0, 0);
 	mlx_destroy_image(fdf->mlx, fdf->img.ptr);
 }

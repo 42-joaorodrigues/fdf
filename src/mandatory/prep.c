@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:28:15 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/31 13:27:21 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/11/01 15:49:37 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,63 @@ void	prep_values(t_fdf *fdf)
 	fdf->yproj_span = ft_abs(fdf->yproj_max - fdf->yproj_min);
 	fdf->base_color = 0x306468;
 	assign_colors(fdf);
-	zoom_y = (float)FDF_HEIGHT * 0.8f / (float)fdf->yproj_span;
-	zoom_x = (float)FDF_WIDTH * 0.8f / (float)fdf->xproj_span;
+	zoom_y = (float)HEIGHT * 0.8f / (float)fdf->yproj_span;
+	zoom_x = (float)WIDTH * 0.8f / (float)fdf->xproj_span;
 	fdf->zoom = zoom_x;
 	if (zoom_y < zoom_x)
 		fdf->zoom = zoom_y;
 	center_x = (fdf->xproj_max + fdf->xproj_min) / 2.0f;
 	center_y = (fdf->yproj_max + fdf->yproj_min) / 2.0f;
-	fdf->x_offset = (FDF_WIDTH / 2.0f) - (center_x * fdf->zoom);
-	fdf->y_offset = (FDF_HEIGHT / 2.0f) - (center_y * fdf->zoom);
+	fdf->x_offset = (WIDTH / 2.0f) - (center_x * fdf->zoom);
+	fdf->y_offset = (HEIGHT / 2.0f) - (center_y * fdf->zoom);
 	fdf->z_scale = Z_SCALE;
 	fdf->alpha = 0.0f;
-    fdf->theta = 0.0f;
-    fdf->gamma = 0.0f;
+	fdf->theta = 0.0f;
+	fdf->gamma = 0.0f;
+	fdf->projection_mode = PROJ_ISOMETRIC;
+}
+
+void	recalculate_view(t_fdf *fdf)
+{
+	int		y;
+	int		x;
+	t_point	proj;
+	int		min_x;
+	int		max_x;
+	int		min_y;
+	int		max_y;
+	float	zoom_x;
+	float	zoom_y;
+
+	fdf->zoom = 1.0f;
+	fdf->x_offset = 0.0f;
+	fdf->y_offset = 0.0f;
+	min_x = INT_MAX;
+	max_x = INT_MIN;
+	min_y = INT_MAX;
+	max_y = INT_MIN;
+	y = -1;
+	while (++y < fdf->map_height)
+	{
+		x = -1;
+		while (++x < fdf->map_width)
+		{
+			proj = proj_point(fdf, x, y);
+			if (proj.x < min_x)
+				min_x = proj.x;
+			if (proj.x > max_x)
+				max_x = proj.x;
+			if (proj.y < min_y)
+				min_y = proj.y;
+			if (proj.y > max_y)
+				max_y = proj.y;
+		}
+	}
+	zoom_x = (float)WIDTH * 0.8f / (float)(max_x - min_x);
+	zoom_y = (float)HEIGHT * 0.8f / (float)(max_y - min_y);
+	fdf->zoom = zoom_x;
+	if (zoom_y < zoom_x)
+		fdf->zoom = zoom_y;
+	fdf->x_offset = (WIDTH / 2.0f) - ((max_x + min_x) / 2.0f) * fdf->zoom;
+	fdf->y_offset = (HEIGHT / 2.0f) - ((max_y + min_y) / 2.0f) * fdf->zoom;
 }
